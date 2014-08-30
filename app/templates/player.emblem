@@ -1,0 +1,11 @@
+.navbar-stick-left class={ isCollapsed:navbar-collapsed }
+  if currentTrack
+    img class="track-image" src=formattedArtwork
+  
+  soundcloud-player track=currentTrack sound=currentTrackObject position=currentTrackPosition isPlaying=isPlaying isBuffering=isBuffering
+  
+  .tracks-list
+    ul.list-unstyled
+      each track in sortedTracks
+        li class={ track.playingTrack:active }
+          a{ action 'selectTrack' track _view.contentIndex }= track.title

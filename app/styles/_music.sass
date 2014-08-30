@@ -1,0 +1,51 @@
+.tracks-playlist a.active
+  color: darken($brand-primary, 10%)
+  text-decoration: underline
+
+.album-list-item
+  display: block
+  margin-bottom: 30px
+
+  &:after
+    color: white
+    content: "\f144"
+    font: normal normal normal 140px/1 FontAwesome
+    left: 50%
+    margin-left: -60px
+    margin-top: -80px
+    opacity: 0
+    position: absolute
+    top: 50%
+    transition: opacity 0.2s ease-in-out
+
+  &:hover:after
+    opacity: 1
+
+.artist-form
+  display: inline-block
+  padding: 10px 0
+  width: 100%
+
+  &:after
+    background: url('/images/powered-by-soundcloud.png') no-repeat center
+    content: ''
+    display: block
+    height: 32px
+    position: absolute
+    right: 15px
+    width: 104px
+
+.artist-input
+  border: 0
+  border-radius: 0
+  border-bottom: 1px solid #333
+  box-shadow: none
+  color: #222
+  font-size: 36px
+  min-height: 50px
+  padding: 0
+  padding-bottom: 5px
+
+  &:focus
+    border-color: #333
+    box-shadow: none

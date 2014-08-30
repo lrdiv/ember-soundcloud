@@ -1,0 +1,21 @@
+h4
+  if track
+    span.track-status
+      if isBuffering
+        i.fa.fa-spinner.fa-spin
+      else
+        if isPlaying
+          a{ action 'pauseTrack' }
+            i.fa.fa-pause
+        else
+          if isPaused
+            a{ action 'resumeTrack' }
+              i.fa.fa-play
+          else
+            a{ action 'playTrack'}
+              i.fa.fa-play
+  
+  span.track-times #{formattedPosition} / #{formattedDuration}
+
+.track-progress.progress.progress
+  .progress-bar.progress-bar-primary aria-valuemax="100" aria-valuemin="0" role="progressbar"

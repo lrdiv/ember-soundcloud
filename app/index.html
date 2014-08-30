@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ember Soundcloud</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/mc-ember.css">
+  </head>
+  <body>
+    <script>
+      window.McEmberENV = {{ENV}};
+      window.EmberENV = window.McEmberENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/mc-ember.js"></script>
+    <script>
+      window.McEmber = require('mc-ember/app')['default'].create(McEmberENV.APP);
+    </script>
+    <script src="http://connect.soundcloud.com/sdk.js"></script>
+    <div id="soundcloud-root"></div>
+  </body>
+</html>

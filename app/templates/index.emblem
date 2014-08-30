@@ -1,0 +1,24 @@
+.row
+  .col-xs-12
+    .artist-form
+      form{ action 'setArtist' on='submit' }
+        view Ember.TextField value=artistName classNames="col-xs-12 form-control artist-input" autofocus="true"
+
+.row
+  .col-xs-12
+    if audioError
+      h2 Artist is invalid or does not have any playlists.
+
+    if audioLoading
+      | LOADING...
+    
+    if showHelpText
+      h2 Enter an artist's Soundcloud username above, then press Enter.
+
+
+  each playlist in sortedPlaylists itemController='playlist'
+    if playlist.formattedArtwork
+      .col-xs-4
+        a{ action 'setAsPlaylist' playlist } class="album-list-item"
+          img src=formattedArtwork
+  
