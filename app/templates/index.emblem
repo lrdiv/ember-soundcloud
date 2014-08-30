@@ -13,8 +13,18 @@
       | LOADING...
     
     if showHelpText
-      h2 Enter an artist's Soundcloud username above, then press Enter.
-
+      .recommendations
+        h2 Enter an artist's Soundcloud username above, then press Enter.
+        p Need some recommendations? Check out:
+        ul.list-inline
+          li
+            a{ action 'setRecommendedArtist' 'prettylights' } "prettylights"
+          li 
+            a{ action 'setRecommendedArtist' 'teeel' } "teeel"
+          li
+            a{ action 'setRecommendedArtist' 'teendaze' } "teendaze"
+          li
+            a{ action 'setRecommendedArtist' 'carparkrecords' } "carparkrecords"
 
   each playlist in sortedPlaylists itemController='playlist'
     if playlist.formattedArtwork

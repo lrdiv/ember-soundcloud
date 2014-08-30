@@ -13,6 +13,9 @@ IndexController = Ember.ArrayController.extend
   ).property 'noArtist', 'audioError'
 
   actions:
+    setRecommendedArtist: (artist) ->
+      @set 'artistName', artist
+      @send 'setArtist'
 
     setArtist: ->
       @set 'audioLoading', true
