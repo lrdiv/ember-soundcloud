@@ -1,34 +1,12 @@
 .row
   .col-xs-12
-    .artist-form
-      form{ action 'setArtist' on='submit' }
-        view Ember.TextField value=artistName classNames="col-xs-12 form-control artist-input" autofocus="true"
-
-.row
-  .col-xs-12
-    if audioError
-      h2 Artist is invalid or does not have any playlists.
-
-    if audioLoading
-      | LOADING...
+    if errorText
+      .alert.alert-danger== errorText
     
-    if showHelpText
-      .recommendations
-        h2 Enter an artist's Soundcloud username above, then press Enter.
-        p Need some recommendations? Check out:
-        ul.list-inline
-          li
-            a{ action 'setRecommendedArtist' 'prettylights' } "prettylights"
-          li 
-            a{ action 'setRecommendedArtist' 'teeel' } "teeel"
-          li
-            a{ action 'setRecommendedArtist' 'teendaze' } "teendaze"
-          li
-            a{ action 'setRecommendedArtist' 'carparkrecords' } "carparkrecords"
-
-  each playlist in sortedPlaylists itemController='playlist'
-    if playlist.formattedArtwork
-      .col-xs-4
-        a{ action 'setAsPlaylist' playlist } class="album-list-item"
-          img src=formattedArtwork
-  
+    .recommendations
+      p Need some recommendations? Check out:
+      ul.list-inline
+        li: link-to 'artist' 'prettylights' | "prettylights"
+        li: link-to 'artist' 'teeel' | "teeel"
+        li: link-to 'artist' 'teendaze' | "teendaze"
+        li: link-to 'artist' 'carparkrecords' | "carparkrecords"

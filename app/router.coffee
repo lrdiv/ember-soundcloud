@@ -3,5 +3,6 @@ Router = Ember.Router.extend
 
 Router.map ->
   @route 'index', { path: '/' }
+  @route 'artist', { path: '/:artist' }
 
 `export default Router`
