@@ -5,6 +5,7 @@
 .album-list-item
   display: block
   margin-bottom: 30px
+  position: relative
 
   &:after
     color: white
@@ -19,6 +20,21 @@
     transition: opacity 0.2s ease-in-out
 
   &:hover:after
+    opacity: 1
+
+  .album-title
+    background-color: rgba(255, 255, 255, 0.75)
+    color: #222
+    font-size: 16px
+    left: 0
+    opacity: 0
+    padding: 10px
+    position: absolute
+    top: 0
+    transition: opacity 0.2s ease-in-out
+    width: 100%
+
+  &:hover .album-title
     opacity: 1
 
 .artist-form
