@@ -15,5 +15,5 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-public/credentials.js
-Gruntfile.js
+/public/credentials.js
+/Gruntfile.js
