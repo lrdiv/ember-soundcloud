@@ -1,7 +1,5 @@
 /* jshint node: true */
 
-soundcloud_api_key = '';
-
 module.exports = function(environment) {
   var ENV = {
     environment: environment,
@@ -34,8 +32,6 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
   }
-
-  ENV.soundcloud_client_id = soundcloud_api_key;
 
   return ENV;
 };

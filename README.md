@@ -10,8 +10,8 @@ This README outlines the details of collaborating on this Ember application.
 
 ## Configuration
 
-* Set the `soundcloud_api_key` variable on line 3 of `config/environment.js`
-* If you want to deploy, set the `hostName` variable on line 1 of `Gruntfile.js`
+* Set your credentials in `public/credentials-sample.js`
+* Rename the file to `public/credentials.js`
 
 ## Running
 
@@ -26,10 +26,5 @@ This README outlines the details of collaborating on this Ember application.
 ## Building
 
 * `ember build`
-
-## Deployment
-
-* Make sure the `hostName` variable is set in `Gruntfile.js`
-* `grunt sync`
 
 For more information on using ember-cli, visit [http://iamstef.net/ember-cli/](http://iamstef.net/ember-cli/).

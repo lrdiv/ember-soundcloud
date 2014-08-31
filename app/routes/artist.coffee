@@ -6,7 +6,7 @@ ArtistRoute = Ember.Route.extend
   beforeModel: ->
     # Initialize soundcloud before hitting API
     SC.initialize
-      client_id: McEmberENV.soundcloud_client_id
+      client_id: window.soundcloud_api_key
       redirect_url: '#'
   
   model: (params) ->
