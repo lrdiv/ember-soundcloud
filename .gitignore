@@ -7,6 +7,7 @@
 # dependencies
 /node_modules
 /vendor/*
+/bower_components
 
 # misc
 /.sass-cache
@@ -15,5 +16,5 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-/public/credentials.js
+/app/utils/secrets.coffee
 /Gruntfile.js

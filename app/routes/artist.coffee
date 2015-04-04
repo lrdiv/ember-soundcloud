@@ -1,12 +1,15 @@
+`import secrets from 'mc-ember/utils/secrets'`;
+
 ArtistRoute = Ember.Route.extend
 
   needs: ['player']
   player: Ember.computed.alias 'controllers.player'
 
   beforeModel: ->
+    console.log secrets
     # Initialize soundcloud before hitting API
     SC.initialize
-      client_id: window.soundcloud_api_key
+      client_id: secrets.soundcloud_api_key
       redirect_url: '#'
   
   model: (params) ->
