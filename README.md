@@ -1,4 +1,4 @@
-# Mc-ember
+# ember-soundcloud
 
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
@@ -19,6 +19,8 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* rename `app/utils/secrets-sample.coffee` to `secrets.coffee`
+* add your Soundcloud API key to `secrets.coffee`
 
 ## Running / Development
 
