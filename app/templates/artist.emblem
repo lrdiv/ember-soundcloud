@@ -3,6 +3,6 @@
     if playlist.formattedArtwork
       .col-xs-4
         a{ action 'setAsPlaylist' playlist } class="album-list-item"
-          img src=formattedArtwork
+          img src=playlist.formattedArtwork
           span.album-title=playlist.title
   

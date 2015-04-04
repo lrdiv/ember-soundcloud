@@ -1,5 +1,7 @@
+`import config from './config/environment'`
+
 Router = Ember.Router.extend
-  location: McEmberENV.locationType
+  location: config.locationType
 
 Router.map ->
   @route 'index', { path: '/' }
