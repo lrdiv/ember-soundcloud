@@ -1,4 +1,4 @@
-PlaylistController = Ember.ObjectController.extend
+PlaylistController = Ember.Controller.extend
 
   albumArt: ( ->
     # Check the playlist record for artwork
@@ -7,13 +7,13 @@ PlaylistController = Ember.ObjectController.extend
 
     # If the playlist artwork is empty, try the first
     # track
-    firstTrack = @get('tracks').get 'firstObject'
+    firstTrack = @get('model.tracks').get 'firstObject'
     trackArt = firstTrack.get 'artwork_url' if firstTrack?
     return trackArt if trackArt?
 
     # If the first track has no artwork, try the last
     # track, then just give up
-    lastTrack = @get('tracks').get 'lastObject'
+    lastTrack = @get('model.tracks').get 'lastObject'
     trackArt = lastTrack.get 'artwork_url' if lastTrack?
     return trackArt
   ).property 'artwork_url'
