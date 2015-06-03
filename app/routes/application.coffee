@@ -1,4 +1,7 @@
 ApplicationRoute = Ember.Route.extend
+  
+  beforeModel: ->
+    Notification.requestPermission() if Notification?
 
   renderTemplate: ->
     @_super()
