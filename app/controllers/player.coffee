@@ -1,5 +1,8 @@
 PlayerController = Ember.Controller.extend
 
+  needs: ['application']
+  application: Ember.computed.alias 'controllers.application'
+
   isExpanded: false
   trackSortProperties: ['created_at:desc']
 
@@ -67,7 +70,7 @@ PlayerController = Ember.Controller.extend
           if play
             # Show a desktop notification
             if Notification? and Notification.permission == "granted"
-              notificationTitle = self.controllerFor('application').get 'artistUsername'
+              notificationTitle = self.get('application.artistUsername')
               notificationOptions =
                 body: track.get 'title'
                 icon: self.get 'formattedArtwork'

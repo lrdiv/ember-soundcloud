@@ -2,9 +2,6 @@
 
 ArtistRoute = Ember.Route.extend
 
-  needs: ['player']
-  player: Ember.computed.alias 'controllers.player'
-
   beforeModel: ->
     # Initialize soundcloud before hitting API
     SC.initialize
@@ -26,7 +23,6 @@ ArtistRoute = Ember.Route.extend
           self.resetStore()
           self.controllerFor 'application' 
             .set 'artistUsername', playlists[0].user.username
-
           # Loop over playlists and create records in store
           playlists.forEach (item, index, arr) ->
             playlist = self.createPlaylist(item, playlistProxy)
