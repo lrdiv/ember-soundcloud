@@ -34,8 +34,7 @@ PlayerController = Ember.Controller.extend
       prevTrack.destruct() if prevTrack? 
       self.set 'currentTrack', track
 
-      # Set the next track so that it can autoplay on current
-      # track completion
+      # Set the next track so that it can autoplay on current track completion
       unless @get 'externalPlay'
         index = index + 1
         # Get the next track from the playlist
@@ -59,13 +58,23 @@ PlayerController = Ember.Controller.extend
           # If there is a next track, play it.
           self.send('selectTrack', self.get('nextTrack'), index) if self.get('nextTrack')?
         
-        # Set the sound on the controller, set isPlaying to true
-        # and start playing the sound
+        # Set the sound on the controller, set isPlaying to true and start
+        # playing the sound
         , (sound) ->
           self.set 'currentTrackObject', sound
           self.set 'isPlaying', true
           sound.play()
-          unless play
+          if play
+            # Show a desktop notification
+            if Notification? and Notification.permission == "granted"
+              notificationTitle = self.controllerFor('application').get 'artistUsername'
+              notificationOptions =
+                body: track.get 'title'
+                icon: self.get 'formattedArtwork'
+
+              trackNotification = new Notification notificationTitle, notificationOptions
+              setTimeout trackNotification.close.bind(trackNotification), 5000
+          else
             sound.pause()
             self.set 'isPlaying', false
 

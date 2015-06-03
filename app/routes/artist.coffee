@@ -6,7 +6,6 @@ ArtistRoute = Ember.Route.extend
   player: Ember.computed.alias 'controllers.player'
 
   beforeModel: ->
-    console.log secrets
     # Initialize soundcloud before hitting API
     SC.initialize
       client_id: secrets.soundcloud_api_key
@@ -25,26 +24,27 @@ ArtistRoute = Ember.Route.extend
       SC.get "/users/#{artist}/playlists", (playlists) ->
         if playlists.length
           self.resetStore()
+          self.controllerFor 'application' 
+            .set 'artistUsername', playlists[0].user.username
+
           # Loop over playlists and create records in store
           playlists.forEach (item, index, arr) ->
             playlist = self.createPlaylist(item, playlistProxy)
             # Loop over tracks and create records in store
             item.tracks.forEach (track, index, arr) ->
               track = self.createTrack(track, playlist)
-          # Get the content of our ArrayProxy to resolve our
-          # promise with
+          # Get the content of our ArrayProxy to resolve our promise with
           playlists = playlistProxy.get 'content'
           resolve(playlists)
         else
-          # If there are not playlists, call the errorHandler
-          # function which shows alert and redirects to index
+          # If there are not playlists, call the errorHandler function which 
+          # shows alert and redirects to index
           reject(self.errorHandler(artist))
 
   setupController: (controller, model) ->
     @_super controller, model
-    # Get the model's first playlist and track to
-    # have something loaded in the player outlet,
-    # without having to autoplay
+    # Get the model's first playlist and track to have something loaded in the 
+    # player outlet, without having to autoplay
     tracks = model
       .get 'firstObject'
       .get 'tracks'
@@ -55,14 +55,14 @@ ArtistRoute = Ember.Route.extend
     controller
 
   resetStore: ->
-    # Clear out the store. Only the current
-    # artist's playlists and tracks should exist
+    # Clear out the store. Only the current artist's playlists and tracks should 
+    # exist
     @store.unloadAll 'playlist'
     @store.unloadAll 'track'
 
   createPlaylist: (playlist, arr) ->
-    # Create the empty record, set the properties
-    # and then push it into the playlist ArrayProxy
+    # Create the empty record, set the properties and then push it into the
+    # playlist ArrayProxy
     record = @store.createRecord 'playlist', {}
     record.setProperties
       id: playlist.id
@@ -72,8 +72,8 @@ ArtistRoute = Ember.Route.extend
     return record
 
   createTrack: (track, playlist) ->
-    # Create the empty record, set the properties
-    # and then set the playlist association
+    # Create the empty record, set the properties and then set the playlist
+    # association
     record = @store.createRecord 'track', {}
     record
       .setProperties track
@@ -81,8 +81,8 @@ ArtistRoute = Ember.Route.extend
     return record
 
   errorHandler: (artist) ->
-    # Set error text on the controller if the artist
-    # was not found or had zero playlists
+    # Set error text on the controller if the artist was not found or had zero
+    # playlists
     @controllerFor 'index'
       .set 'errorText', "Artist #{artist} is invalid or does not have any playlists."
 
