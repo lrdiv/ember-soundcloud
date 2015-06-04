@@ -64,6 +64,7 @@ ArtistRoute = Ember.Route.extend
       id: playlist.id
       title: playlist.title
       artwork_url: playlist.artwork_url
+      permalink: playlist.permalink
     arr.pushObject record
     return record
 
