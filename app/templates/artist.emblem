@@ -1,8 +1,4 @@
 .row
-  each playlist in sortedPlaylists itemController='playlist'
-    if playlist.formattedArtwork
-      .col-xs-4
-        a{ action 'setAsPlaylist' playlist } class="album-list-item"
-          img src=playlist.formattedArtwork
-          span.album-title=playlist.title
+  each playlist in sortedPlaylists
+    play-list playlist=playlist action='setAsPlaylist'
   
