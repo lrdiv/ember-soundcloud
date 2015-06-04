@@ -1,5 +1,5 @@
 if formattedArtwork
   .col-xs-4
-    a{ action 'setAsPlaylist' playlist } class="album-list-item"
+    link-to 'artist.playlist' playlist.permalink classNames="album-list-item"
       img src=formattedArtwork
       span.album-title=playlist.title
