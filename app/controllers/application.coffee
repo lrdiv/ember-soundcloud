@@ -4,10 +4,7 @@ ApplicationController = Ember.Controller.extend
 
   actions:
     goToArtist: ->
-      if @get('player.artistName').length
-        # Action that redirects to the artist route and passes the username as a
-        # param
-        artist = @get 'player.artistName'
-        @transitionToRoute 'artist', artist
+      artist = @get('player.artistName')
+      @transitionToRoute('artist', artist) if artist.length
 
 `export default ApplicationController`

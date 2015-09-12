@@ -8,6 +8,6 @@
         .col-xs-12
           .artist-form
             form{ action 'goToArtist' on='submit' }
-              input type="text" value=player.artistName class="col-xs-12 form-control artist-input" autofocus="true" placeholder="type a soundcloud username, then press enter"
+              = input type="text" value=player.artistName class="col-xs-12 form-control artist-input" autofocus="true" placeholder="type a soundcloud username, then press enter"
 
           == outlet
