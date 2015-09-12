@@ -1,4 +1,4 @@
-SoundcloudPlayerComponent = Ember.Component.extend
+TrackPlayerComponent = Ember.Component.extend
 
   tagName: 'div'
   classNames: ['soundcloud-player']
@@ -52,4 +52,4 @@ SoundcloudPlayerComponent = Ember.Component.extend
       @set 'isPlaying', true
       @set 'isPaused', false
 
-`export default SoundcloudPlayerComponent`
+`export default TrackPlayerComponent`

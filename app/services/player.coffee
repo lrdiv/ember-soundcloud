@@ -52,6 +52,7 @@ PlayerService = Ember.Service.extend
       # playing the sound
       , (sound) ->
         self.set 'isPlaying', true
+        self.set 'currentTrackObject', sound
         sound.play()
         if play
           # Show a desktop notification

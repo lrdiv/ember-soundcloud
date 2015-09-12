@@ -1,4 +1,4 @@
-ScPlayerComponent = Ember.Component.extend
+TrackManagerComponent = Ember.Component.extend
 
   player: Ember.inject.service()
   
@@ -6,4 +6,4 @@ ScPlayerComponent = Ember.Component.extend
     playTrack: (track) ->
       @get('player').selectTrack(track)
 
-`export default ScPlayerComponent`
+`export default TrackManagerComponent`

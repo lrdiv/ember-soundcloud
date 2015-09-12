@@ -1,4 +1,4 @@
-PlayListComponent = Ember.Component.extend
+PlaylistItemComponent = Ember.Component.extend
 
   playlistClasses: 'album-list-item'
 
@@ -28,4 +28,4 @@ PlayListComponent = Ember.Component.extend
     setAsPlaylist: (playlist) ->
       @sendAction 'action', playlist
 
-`export default PlayListComponent`
+`export default PlaylistItemComponent`
