@@ -1,6 +1,9 @@
 h4
   if track
     span.track-status
+      a{ action 'prevTrack' }
+        i.fa.fa-step-backward.pad-right
+
       if isBuffering
         i.fa.fa-spinner.fa-spin
       else
@@ -14,6 +17,9 @@ h4
           else
             a{ action 'playTrack'}
               i.fa.fa-play
+        
+      a{ action 'nextTrack' }
+        i.fa.fa-step-forward.pad-left
   
   span.track-times #{formattedPosition} / #{formattedDuration}
 

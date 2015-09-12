@@ -10,6 +10,6 @@ ArtistPlaylistRoute = Ember.Route.extend
     tracks = playlist.get 'tracks'
     track = tracks.get 'firstObject'
     @get('player').set 'tracks', tracks
-    @get('player').selectTrack(track, 0, true) if track?
+    @get('player').selectTrack(track, true) if track?
 
 `export default ArtistPlaylistRoute`

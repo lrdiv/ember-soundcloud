@@ -1,5 +1,7 @@
 TrackPlayerComponent = Ember.Component.extend
 
+  player: Ember.inject.service()
+
   tagName: 'div'
   classNames: ['soundcloud-player']
 
@@ -51,5 +53,11 @@ TrackPlayerComponent = Ember.Component.extend
       @get('sound').play()
       @set 'isPlaying', true
       @set 'isPaused', false
+    
+    nextTrack: ->
+      @get('player').playNextTrack()
+    
+    prevTrack: ->
+      @get('player').playPrevTrack()
 
 `export default TrackPlayerComponent`
