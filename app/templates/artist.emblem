@@ -1,4 +1,4 @@
 .row
-  each playlist in sortedPlaylists
-    play-list playlist=playlist action='setAsPlaylist'
+  each sortedPlaylists as |playlist|
+    playlist-item playlist=playlist action='setAsPlaylist'
   

@@ -1,7 +1,6 @@
-ArtistController = Ember.ArrayController.extend
+ArtistController = Ember.Controller.extend
 
-  needs: ['player']
-  player: Ember.computed.alias 'controllers.player'
+  player: Ember.inject.service()
 
   sortProperties: ['created_at:desc']
   sortedPlaylists: Ember.computed.sort 'model', 'sortProperties'

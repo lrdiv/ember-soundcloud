@@ -1,0 +1,11 @@
+.navbar-stick-left class={ isCollapsed:navbar-collapsed }
+  if player.currentTrack
+    img class="track-image" src=player.formattedArtwork
+  
+  track-player track=player.currentTrack sound=player.currentTrackObject position=player.currentTrackPosition isPlaying=player.isPlaying isBuffering=player.isBuffering
+  
+  .tracks-list
+    ul.list-unstyled
+      each player.sortedTracks as |track|
+        li class={ track.playingTrack:active }
+          a{ action 'playTrack' track }= track.title

@@ -1,12 +1,15 @@
 ArtistPlaylistRoute = Ember.Route.extend
+  
+  player: Ember.inject.service()
+
   model: (params) ->
-    playlists = @store.all 'playlist'
+    playlists = @store.peekAll 'playlist'
       .findBy 'permalink', params.playlist
 
-  afterModel: (playlist) ->
+  setupController: (controller, playlist) ->
     tracks = playlist.get 'tracks'
     track = tracks.get 'firstObject'
-    @controllerFor('player').set 'tracks', tracks if track?
-    @controllerFor('player').send 'selectTrack', track if track?
+    @get('player').set 'tracks', tracks
+    @get('player').selectTrack(track, 0, true) if track?
 
 `export default ArtistPlaylistRoute`

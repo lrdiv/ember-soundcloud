@@ -1,5 +1,8 @@
 PlayListComponent = Ember.Component.extend
-  albumArt: ( ->
+
+  playlistClasses: 'album-list-item'
+
+  albumArt: Ember.computed 'playlist.artwork_url', ->
     # Check the playlist record for artwork
     playlistArt = @get 'playlist.artwork_url'
     return playlistArt if playlistArt?
@@ -13,15 +16,13 @@ PlayListComponent = Ember.Component.extend
     lastTrack = @get('playlist.tracks').get 'lastObject'
     trackArt = lastTrack.get 'playlist.artwork_url' if lastTrack?
     return trackArt
-  ).property 'playlist.artwork_url'
 
-  formattedArtwork: ( ->
+  formattedArtwork: Ember.computed 'albumArt', ->
     if @get 'albumArt'
       # Reformat the artwork URL to get a bigger version of the image
       url = @get 'albumArt'
       splitURL = url.split '-large'
       return splitURL[0] + '-t500x500' + splitURL[1]
-  ).property 'albumArt'
 
   actions:
     setAsPlaylist: (playlist) ->

@@ -19,6 +19,7 @@
     top: 50%
     transition: opacity 0.2s ease-in-out
 
+  &.active:after,
   &:hover:after
     opacity: 1
 
@@ -34,7 +35,8 @@
     transition: opacity 0.2s ease-in-out
     width: 100%
 
-  &:hover .album-title
+  &:hover .album-title,
+  &.active .album-title
     opacity: 1
 
 .artist-form

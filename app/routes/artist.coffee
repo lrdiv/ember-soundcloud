@@ -1,28 +1,31 @@
-`import secrets from 'mc-ember/utils/secrets'`;
+`import secrets from 'mc-ember/utils/secrets'`
 
 ArtistRoute = Ember.Route.extend
 
-  beforeModel: ->
+  player: Ember.inject.service()
+
+  beforeModel: (transition) ->
     # Initialize soundcloud before hitting API
     SC.initialize
       client_id: secrets.soundcloud_api_key
       redirect_url: '#'
-  
+
   model: (params) ->
     self = this
     artist = params.artist
-    # Set the artist name on the ApplicationController
+    # Set the artist name
+    @get('player').set('artistName', artist)
+
     @controllerFor 'application'
       .set 'artistName', artist
     # Create an ArrayProxy to resolve our promise with
     playlistProxy = Ember.ArrayProxy.create content: []
-    
+
     return new Ember.RSVP.Promise (resolve, reject) ->
       SC.get "/users/#{artist}/playlists", (playlists) ->
         if playlists.length
           self.resetStore()
-          self.controllerFor 'application' 
-            .set 'artistUsername', playlists[0].user.username
+          self.get('player').set 'artistUsername', playlists[0].user.username
           # Loop over playlists and create records in store
           playlists.forEach (item, index, arr) ->
             playlist = self.createPlaylist(item, playlistProxy)
@@ -33,25 +36,12 @@ ArtistRoute = Ember.Route.extend
           playlists = playlistProxy.get 'content'
           resolve(playlists)
         else
-          # If there are not playlists, call the errorHandler function which 
+          # If there are not playlists, call the errorHandler function which
           # shows alert and redirects to index
           reject(self.errorHandler(artist))
 
-  setupController: (controller, model) ->
-    @_super controller, model
-    # Get the model's first playlist and track to have something loaded in the 
-    # player outlet, without having to autoplay
-    tracks = model
-      .get 'firstObject'
-      .get 'tracks'
-    track = tracks.get 'firstObject'
-    @controllerFor 'player'
-      .set 'tracks', tracks
-      .send 'selectTrack', track, 0, false
-    controller
-
   resetStore: ->
-    # Clear out the store. Only the current artist's playlists and tracks should 
+    # Clear out the store. Only the current artist's playlists and tracks should
     # exist
     @store.unloadAll 'playlist'
     @store.unloadAll 'track'
@@ -72,9 +62,8 @@ ArtistRoute = Ember.Route.extend
     # Create the empty record, set the properties and then set the playlist
     # association
     record = @store.createRecord 'track', {}
-    record
-      .setProperties track
-      .set 'playlist', playlist
+    record.setProperties track
+    record.set 'playlist', playlist
     return record
 
   errorHandler: (artist) ->

@@ -10,36 +10,31 @@ SoundcloudPlayerComponent = Ember.Component.extend
 
   # PROPERTIES AND OBSERVERS FOR SCRUBBER RELATED STUFF
   
-  percentPlayed: ( ->
+  percentPlayed: Ember.computed 'track.duration', 'position', ->
     percent = 0
     percent = ( ( @get('position') / @get('track').get('duration') ) * 100 ) if @get('track')?
     return percent
-  ).property 'track.duration', 'position'
 
-  setPercentPlayed: ( ->
+  setPercentPlayed: Ember.observer 'percentPlayed', 'position', ->
     percent = @get 'percentPlayed'
     this.$('.progress-bar').css 'width', "#{percent}%"
-  ).observes 'percentPlayed', 'position'
 
-  formattedPosition: ( ->
+  formattedPosition: Ember.computed 'position', ->
     position = @get 'position'
     res = @formatTime(position)
     return res
-  ).property 'position'
 
-  formattedDuration: ( ->
+  formattedDuration: Ember.computed 'track.duration', ->
     duration = @get 'track.duration'
     res = @formatTime(duration)
     return res
-  ).property 'track.duration'
 
   formatTime: (time) ->
-    time = if isNaN(time) then 0 else time 
-    timeObject = new Date(time)
-    minutes = timeObject.getMinutes().toString()
-    seconds = timeObject.getSeconds().toString()
-    seconds = if seconds.length < 2 then "0#{seconds}" else seconds
-    return "#{minutes}:#{seconds}"
+    date = new Date(null)
+    seconds = time / 1000
+    seconds = if isNaN(seconds) then 0 else seconds
+    date.setSeconds(seconds)
+    return date.toISOString().substr(11, 8)
 
   actions:
     pauseTrack: ->
