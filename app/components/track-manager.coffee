@@ -4,6 +4,6 @@ TrackManagerComponent = Ember.Component.extend
   
   actions:
     playTrack: (track) ->
-      @get('player').selectTrack(track)
+      @get('player').selectTrack(track, true)
 
 `export default TrackManagerComponent`

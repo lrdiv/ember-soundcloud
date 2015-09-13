@@ -11,6 +11,6 @@ ArtistIndexRoute = Ember.Route.extend
       .get 'tracks'
     track = tracks.get 'firstObject'
     @get('player').set('tracks', tracks)
-    @get('player').selectTrack(track, 0, false)
+    @get('player').selectTrack(track, false)
 
 `export default ArtistIndexRoute`

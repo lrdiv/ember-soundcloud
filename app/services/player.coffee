@@ -15,8 +15,16 @@ PlayerService = Ember.Service.extend
   togglePlayer: ->
     @toggleProperty 'isCollapsed'
     return false
+  
+  playNextTrack: ->
+    next = @get('nextTrack')
+    @selectTrack(next, true) if next
 
-  selectTrack: (track, index, play) ->
+  playPrevTrack: ->
+    prev = @get('prevTrack')
+    @selectTrack(prev, true) if prev
+
+  selectTrack: (track, play) ->
     self = this
     SC.streamStopAll()
 
@@ -28,10 +36,14 @@ PlayerService = Ember.Service.extend
     track.set('playingTrack', true)
 
     trackPath = track.get('uri')
+    trackIndex = @get('sortedTracks').indexOf(track)
 
-    trackIndex = index + 1
-    nextTrack = self.get('sortedTracks').nextObject(trackIndex, track)
-    @set('nextTrack', nextTrack)
+    nextTrack = self.get('sortedTracks').objectAt(trackIndex + 1)
+    prevTrack = self.get('sortedTracks').objectAt(trackIndex - 1)
+
+    @setProperties
+      prevTrack: prevTrack
+      nextTrack: nextTrack
 
     SC.stream trackPath,
       # Update track position for potential scrubber in future
@@ -46,7 +58,8 @@ PlayerService = Ember.Service.extend
       , onfinish: ->
         self.set 'isPlaying', false
         # If there is a next track, play it.
-        self.selectTrack(self.get('nextTrack'), index) if self.get('nextTrack')?
+        nextTrack = self.get('nextTrack')
+        self.selectTrack(nextTrack, true) if nextTrack?
 
       # Set the sound on the controller, set isPlaying to true and start
       # playing the sound
