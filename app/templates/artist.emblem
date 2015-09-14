@@ -1,4 +1,5 @@
 .row
   each sortedPlaylists as |playlist|
-    playlist-item playlist=playlist action='setAsPlaylist'
+    if playlist.tracks.length
+      playlist-item playlist=playlist action='setAsPlaylist'
   
